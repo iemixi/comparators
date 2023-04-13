@@ -19,7 +19,16 @@ public class App {
             System.out.println(person);
         }
 
-        persons.sort(new PersonComparator().reversed());
+        persons.sort((Person first, Person second) -> {
+            int firstWordsAmount = first.getSurname().split(" ").length;
+            int secondWordsAmount = second.getSurname().split(" ").length;
+
+            if (firstWordsAmount == secondWordsAmount) {
+                return first.getAge() - second.getAge();
+            }
+
+            return firstWordsAmount - secondWordsAmount;
+        });
 
         System.out.println("\nПосле сортировки:");
         for (Person person : persons) {
